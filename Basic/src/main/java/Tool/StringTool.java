@@ -10,9 +10,6 @@ import java.util.regex.Pattern;
 
 public class StringTool {
 
-    public static ArrayList<String> split(String str, String space){
-        ArrayList<String> altStr = new ArrayList<String>(str.split(space)) ;
-    }
     /** 值为"NULL"的字符串 */
     private static final String NULL_STRING = "NULL";
 
@@ -41,87 +38,6 @@ public class StringTool {
      */
     public static byte[] toBytes(String str) {
         return isBlank(str) ? new byte[]{} : str.getBytes();
-    }
-
-    /**
-     * 把字符串转为二进制码<br/>
-     * 本方法不会返回null
-     *
-     * @param str     需要转换的字符串
-     * @param charset 编码类型
-     * @return 二进制字节码数组
-     * @throws UnsupportedEncodingException 字符串转换的时候编码不支持时出现
-     */
-    public static byte[] toBytes(String str, Charset charset) throws UnsupportedEncodingException {
-        return isBlank(str) ? new byte[]{} : str.getBytes(charset.displayName());
-    }
-
-    /**
-     * 把字符串转为二进制码<br/>
-     * 本方法不会返回null
-     *
-     * @param str     需要转换的字符串
-     * @param charset 编码类型
-     * @param locale  编码类型对应的地区
-     * @return 二进制字节码数组
-     * @throws UnsupportedEncodingException 字符串转换的时候编码不支持时出现
-     */
-    public static byte[] toBytes(String str, Charset charset, Locale locale) throws UnsupportedEncodingException {
-        return isBlank(str) ? new byte[]{} : str.getBytes(charset.displayName(locale));
-    }
-
-    /**
-     * 二进制码转字符串<br/>
-     * 本方法不会返回null
-     *
-     * @param bytes 二进制码
-     * @return 字符串
-     */
-    public static String bytesToString(byte[] bytes) {
-        return bytes == null || bytes.length == 0 ? EMPTY : new String(bytes);
-    }
-
-    /**
-     * 二进制码转字符串<br/>
-     * 本方法不会返回null
-     *
-     * @param bytes   二进制码
-     * @param charset 编码集
-     * @return 字符串
-     * @throws UnsupportedEncodingException 当前二进制码可能不支持传入的编码
-     */
-    public static String byteToString(byte[] bytes, Charset charset) {
-        return bytes == null || bytes.length == 0 ? EMPTY : new String(bytes, charset.displayName());
-    }
-
-    /**
-     * 二进制码转字符串<br/>
-     * 本方法不会返回null
-     *
-     * @param bytes   二进制码
-     * @param charset 编码集
-     * @param locale  本地化
-     * @return 字符串
-     * @throws  当前二进制码可能不支持传入的编码
-     */
-    public static String byteToString(byte[] bytes, Charset charset, Locale locale) {
-        return bytes == null || bytes.length == 0 ? StringUtils.EMPTY : new String(bytes, charset.displayName(locale));
-    }
-
-    /**
-     * 把对象转为字符串
-     *
-     * @param object 需要转化的字符串
-     * @return 字符串, 可能为空
-     */
-    public static String parseString(Object object) {
-        if (object == null) {
-            return null;
-        }
-        if (object instanceof byte[]) {
-            return bytesToString((byte[]) object);
-        }
-        return object.toString();
     }
 
     /**

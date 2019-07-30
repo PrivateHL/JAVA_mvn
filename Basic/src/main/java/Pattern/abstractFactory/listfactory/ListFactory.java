@@ -1,9 +1,9 @@
 package Pattern.abstractFactory.listfactory;
 
-import com.pattern.sample.abstractFactory.factory.Factory;
-import com.pattern.sample.abstractFactory.factory.Link;
-import com.pattern.sample.abstractFactory.factory.Page;
-import com.pattern.sample.abstractFactory.factory.Tray;
+import Pattern.abstractFactory.factory.Factory;
+import Pattern.abstractFactory.factory.Link;
+import Pattern.abstractFactory.factory.Page;
+import Pattern.abstractFactory.factory.Tray;
 
 public class ListFactory extends Factory {
 	public Link createLink(String caption, String url){

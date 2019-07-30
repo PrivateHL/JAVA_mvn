@@ -3,8 +3,8 @@ package Pattern.factory.IDCardWithCode;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-import com.pattern.sample.factory.framework.Factory;
-import com.pattern.sample.factory.framework.Product;
+import Pattern.factory.framework.Factory;
+import Pattern.factory.framework.Product;
 
 public class IDCardFactory extends Factory{
 	private HashMap database = new HashMap();

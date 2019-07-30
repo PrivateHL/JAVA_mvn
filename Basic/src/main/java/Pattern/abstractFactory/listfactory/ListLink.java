@@ -1,6 +1,6 @@
 package Pattern.abstractFactory.listfactory;
 
-import com.pattern.sample.abstractFactory.factory.Link;
+import Pattern.abstractFactory.factory.Link;
 
 public class ListLink extends Link{
 

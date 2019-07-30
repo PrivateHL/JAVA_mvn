@@ -1,19 +1,14 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
+package cmd;
 
-import static org.junit.Assert.*;
 
-@RunWith(Arquillian.class)
+import org.junit.Test;
+
 public class CmdUtilsTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(cmd.CmdUtils.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    @Test
+    public void getResult4cmd() {
+        //String cmd = "mvn install:install-file -Dfile=E:\\workspace\\IDEA201803\\JAVA\\lib\\juit-4.12.jar -DgroupId='junit' -DartifactId=junit -Dversion='4.12' -Dpackaging=jar";
+        String cmd = "mvn -version";
+        String res = CmdUtils.getResult4cmd(cmd);
+        System.out.println(res);
     }
-
 }

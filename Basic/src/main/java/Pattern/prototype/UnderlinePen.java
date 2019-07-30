@@ -1,6 +1,6 @@
 package Pattern.prototype;
 
-import com.pattern.sample.prototype.framework.Product;
+import Pattern.prototype.framework.Product;
 
 public class UnderlinePen implements Product{
 
@@ -11,7 +11,6 @@ public class UnderlinePen implements Product{
 	}
 
 
-	@Override
 	public void use(String s) {
 		// TODO Auto-generated method stub
 		int len = s.getBytes().length;
@@ -22,7 +21,6 @@ public class UnderlinePen implements Product{
 		System.out.println("");
 	}
 
-	@Override
 	public Product createClone() {
 		// TODO Auto-generated method stub
 		Product p  = null;

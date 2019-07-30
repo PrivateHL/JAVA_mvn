@@ -1,6 +1,6 @@
 package Pattern.factory.IDCard;
 
-import com.pattern.sample.factory.framework.Product;
+import Pattern.factory.framework.Product;
 
 public class IDCard extends Product {
 

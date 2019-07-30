@@ -1,11 +1,11 @@
 package Pattern.abstractFactory.listfactory;
 
+import Pattern.abstractFactory.factory.Item;
+import Pattern.abstractFactory.factory.Page;
+
 import java.util.Iterator;
 
-import com.pattern.sample.abstractFactory.factory.Item;
-import com.pattern.sample.abstractFactory.factory.Page;
-
-public class ListPage extends Page{
+public class ListPage extends Page {
 	public ListPage(String title,String author){
 		super(title, author);
 	}

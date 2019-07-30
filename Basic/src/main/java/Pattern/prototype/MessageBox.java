@@ -1,6 +1,6 @@
 package Pattern.prototype;
 
-import com.pattern.sample.prototype.framework.Product;
+import Pattern.prototype.framework.Product;
 
 public class MessageBox implements Product{
 
@@ -9,7 +9,6 @@ public class MessageBox implements Product{
 		this.decochar = decochar;
 	}
  
-	@Override
 	public Product createClone() {
 		// TODO Auto-generated method stub
 		Product product = null;
@@ -21,7 +20,6 @@ public class MessageBox implements Product{
 		}
 		return product;
 	}
-	@Override
 	public void use(String s) {
 		// TODO Auto-generated method stub
 		int length = s.getBytes().length;

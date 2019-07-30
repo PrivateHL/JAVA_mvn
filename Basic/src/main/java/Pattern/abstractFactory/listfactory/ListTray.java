@@ -2,8 +2,8 @@ package Pattern.abstractFactory.listfactory;
 
 import java.util.Iterator;
 
-import com.pattern.sample.abstractFactory.factory.Item;
-import com.pattern.sample.abstractFactory.factory.Tray;
+import Pattern.abstractFactory.factory.Item;
+import Pattern.abstractFactory.factory.Tray;
 
 public class ListTray extends Tray{
 	public ListTray(String caption){

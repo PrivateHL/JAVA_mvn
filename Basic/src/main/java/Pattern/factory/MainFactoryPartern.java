@@ -1,8 +1,8 @@
 package Pattern.factory;
 
-import com.pattern.sample.factory.IDCard.IDCardFactory;
-import com.pattern.sample.factory.framework.Factory;
-import com.pattern.sample.factory.framework.Product;
+import Pattern.factory.IDCard.IDCardFactory;
+import Pattern.factory.framework.Factory;
+import Pattern.factory.framework.Product;
 
 public class MainFactoryPartern {
 

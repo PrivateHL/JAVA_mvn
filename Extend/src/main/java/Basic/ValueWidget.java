@@ -1,4 +1,4 @@
-package Tool;
+package Basic;
 
 import java.util.Collection;
 import java.util.Map;

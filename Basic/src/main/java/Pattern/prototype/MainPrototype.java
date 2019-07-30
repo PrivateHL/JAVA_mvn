@@ -1,7 +1,7 @@
 package Pattern.prototype;
 
-import com.pattern.sample.prototype.framework.Manager;
-import com.pattern.sample.prototype.framework.Product;
+import Pattern.prototype.framework.Manager;
+import Pattern.prototype.framework.Product;
 
 public class MainPrototype {
 
