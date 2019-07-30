@@ -60,7 +60,6 @@ public class CmdUtils {
         return content;
     }
 
-
     public static BufferedReader cmdCmdreReader(String command,String charset)
     {
         if(charset==null || charset.equals("")){
