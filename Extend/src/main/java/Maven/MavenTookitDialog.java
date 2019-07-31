@@ -35,7 +35,7 @@ public class MavenTookitDialog extends JFrame {
     private JButton btnJarFile ;
     public static final String MAVEN_INSTALL_JAR_CMD=
             "mvn install:install-file  -Dfile=%s  -DgroupId=%s  -DartifactId=%s -Dversion=%s -Dpackaging=%s";
-    private TextArea txtsResult = new TextArea();
+    private TextArea txtsResult = new TextArea("TEST");
 
     private JButton btnOk;
     private JButton btnCancle;
@@ -69,6 +69,7 @@ public class MavenTookitDialog extends JFrame {
         BorderLayout bdl_contenPanel = new BorderLayout();
         contentPane.setLayout(bdl_contenPanel);
 
+        JScrollPane spnlCenter = new JScrollPane();
         JPanel pnlCenter = new JPanel();
         GridLayout gdl_pnlCenter = new GridLayout(0,1);
         pnlCenter.setLayout(gdl_pnlCenter);
@@ -129,13 +130,12 @@ public class MavenTookitDialog extends JFrame {
 
         pnlCenter.add(new JLabel(""));
 
-        JScrollPane pnlRes = new JScrollPane();
-        ScrollPaneLayout scl_pnlRes = new ScrollPaneLayout();
-        pnlRes.setLayout(scl_pnlRes);
-        pnlRes.add(txtsResult);
-        pnlCenter.add(pnlRes);
+        //JScrollPane pnlRes = new JScrollPane();
+        //pnlRes.setViewportView(txtsResult);
+        //pnlCenter.add(pnlRes);
 
-        contentPane.add(pnlCenter,BorderLayout.CENTER);
+        spnlCenter.setViewportView(pnlCenter);
+        contentPane.add(spnlCenter,BorderLayout.CENTER);
         contentPane.add(pnlNorth,BorderLayout.SOUTH);
 
         btnJarFile.addActionListener(new ActionListener() {
@@ -145,24 +145,25 @@ public class MavenTookitDialog extends JFrame {
                 MavenInstallFileFilter filter = new MavenInstallFileFilter();
                 chooser.addChoosableFileFilter(filter);//选择
                 chooser.setFileFilter(filter);//显示
-                chooser.showDialog(new JLabel(), "选择");
-                File file = chooser.getSelectedFile();
-                if(file.isFile()){
+                if( chooser.showDialog(new JLabel(), "选择") == JFileChooser.APPROVE_OPTION) {
+                    File file = chooser.getSelectedFile();
+                    if (file.isFile()) {
 
-                    filePath = file.getPath();
-                    txtJar.setText(filePath);
-                    if(filePath.toLowerCase().endsWith(".jar")){
-                        packaging = "jar";
-                    }else if(filePath.toLowerCase().endsWith(".pom")){
-                        packaging = "pom";
-                    }else{
-                        packaging = "";
+                        filePath = file.getPath();
+                        txtJar.setText(filePath);
+                        if (filePath.toLowerCase().endsWith(".jar")) {
+                            packaging = "jar";
+                        } else if (filePath.toLowerCase().endsWith(".pom")) {
+                            packaging = "pom";
+                        } else {
+                            packaging = "";
+                        }
+                        txtPackage.setText(packaging);
+                        version = findSubVersion(file.getName());
+                        txtVersion.setText(version);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "文件选取错误");
                     }
-                    txtPackage.setText(packaging);
-                    version = findSubVersion(file.getName());
-                    txtVersion.setText(version);
-                }else{
-                    JOptionPane.showMessageDialog(null,"文件选取错误");
                 }
             }
         });
@@ -176,7 +177,9 @@ public class MavenTookitDialog extends JFrame {
                 version = txtVersion.getText();
                 packaging = txtPackage.getText();
                 String cmd = String.format(MAVEN_INSTALL_JAR_CMD,filePath,group,artifactid,version,packaging);
-                txtsResult.setText( CmdUtils.getResult4cmd(cmd));
+                String res =  CmdUtils.getResult4cmd(cmd);
+                txtsResult.setText(res);
+                JOptionPane.showMessageDialog(null,res);
             }
         });
         btnCancle.addActionListener(new ActionListener() {
