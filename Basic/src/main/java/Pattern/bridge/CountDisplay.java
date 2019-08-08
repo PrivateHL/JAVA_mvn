@@ -16,4 +16,9 @@ public class CountDisplay extends Display {
         }
         close();
     }
+    public final void reaptDispaly(int times){
+        for (int i = 0; i < times; i++) {
+            countDisplay(i);
+        }
+    }
 }

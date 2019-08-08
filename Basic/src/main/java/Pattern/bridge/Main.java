@@ -13,5 +13,12 @@ public class Main {
         display2.display();
         display3.display();
         display3.countDisplay(5);
+
+        FileDisplayImpl fileDisplay = new FileDisplayImpl("C:\\Users\\heling\\Desktop\\新建文本文档 (2).txt");
+        Display displayFile = new Display(fileDisplay);
+        displayFile.display();
+
+        CountDisplay countDisplay = new CountDisplay( new CharDisplayImpl("*"));
+        countDisplay.reaptDispaly(5);
     }
 }
