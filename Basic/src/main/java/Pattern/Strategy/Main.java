@@ -16,25 +16,34 @@ public class Main {
         int seed2 = Integer.parseInt(args[1]);
         Player player1 = new Player("AA",new WnningStrategy(seed1));
         Player player2 = new Player("CC",new ProbStrategy(seed2));
-        for (int i = 0; i <10000 ; i++) {
-            Hand nextHand1 = player1.nextHand();
-            Hand nextHand2 = player2.nextHand();
+        Player player3 = new Player("RR",new RandomStrategy(seed2));
+
+        FightVS(player1,player2,10000);
+        player1.clean();
+        player2.clean();
+        FightVS(player1,player3,10000);
+    }
+
+    private static void FightVS(Player p1, Player p2, int round){
+        for (int i = 0; i <round ; i++) {
+            Hand nextHand1 = p1.nextHand();
+            Hand nextHand2 = p2.nextHand();
             if(nextHand1.fight(nextHand2) == 0){
-                System.out.println("Eve...");
-                player1.even();
-                player2.even();
+//                System.out.println("Eve...");
+                p1.even();
+                p2.even();
             }else if(nextHand1.fight(nextHand2) > 0){
-                System.out.println("Winner:" + player1);
-                player1.win();
-                player2.lose();
+//                System.out.println("Winner:" + p1);
+                p1.win();
+                p2.lose();
             }else{
-                System.out.println("Winner:" + player2);
-                player1.lose();
-                player2.win();
+//                System.out.println("Winner:" + p2);
+                p1.lose();
+                p2.win();
             }
         }
         System.out.println("total result:");
-        System.out.println(player1.toString());
-        System.out.println(player2.toString());
+        System.out.println(p1.toString());
+        System.out.println(p2.toString());
     }
 }

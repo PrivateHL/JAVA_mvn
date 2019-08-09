@@ -28,6 +28,12 @@ public class Player {
         gamecount++;
     }
 
+    public void clean(){
+        wincount = 0;
+        losecount = 0;
+        gamecount = 0;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
