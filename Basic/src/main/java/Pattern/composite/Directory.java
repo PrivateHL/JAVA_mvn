@@ -1,7 +1,6 @@
-package Pattern.Composite;
+package Pattern.composite;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 
 /**
@@ -42,6 +41,7 @@ public class Directory extends Entry {
 
     public Entry add(Entry entry) {
         directory.add(entry);
+        entry.parent = this;
         return this;
     }
 }

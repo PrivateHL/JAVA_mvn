@@ -1,4 +1,4 @@
-package Pattern.Composite;
+package Pattern.composite;
 
 /**
  * @Description 对文件调用add事件时抛出的异常，文件不能作为容器对象

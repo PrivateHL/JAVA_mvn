@@ -1,4 +1,4 @@
-package Pattern.Composite;
+package Pattern.composite;
 
 /**
  * @Description 复合模式的使用者角色

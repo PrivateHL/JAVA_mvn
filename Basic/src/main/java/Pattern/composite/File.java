@@ -1,6 +1,4 @@
-package Pattern.Composite;
-
-import java.util.ArrayList;
+package Pattern.composite;
 
 /**
  * @Description 复合模式中的文件对象，父类是entry
@@ -31,4 +29,5 @@ public class File extends Entry {
     public Entry add(Entry entry) {
         throw new FileThreatmentException("File 类不允许添加下级条目");
     }
+
 }
