@@ -17,7 +17,7 @@ public class Directory extends Entry {
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public int getSize() {

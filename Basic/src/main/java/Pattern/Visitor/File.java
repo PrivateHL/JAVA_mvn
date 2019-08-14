@@ -19,7 +19,7 @@ public class File extends Entry {
     }
 
     public int getSize() {
-        return 0;
+        return size;
     }
 
     public void printList(String prefix) {

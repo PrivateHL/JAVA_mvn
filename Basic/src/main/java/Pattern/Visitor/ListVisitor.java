@@ -16,12 +16,16 @@ public class ListVisitor extends Visitor {
     public void visit(Directory directory) {
 
         System.out.println(currentdir + "/" + directory.getName());
-        String savedir = currentdir + "/" + directory.getName();
+        String savedir = currentdir;
+        currentdir = currentdir + "/" + directory.getName();
         Iterator it = directory.iterator();
         while(it.hasNext()){
             Entry entry = (Entry) it.next();
             entry.accept(this);
         }
         currentdir = savedir;
+    }
+    public void clean(){
+        currentdir = "";
     }
 }
