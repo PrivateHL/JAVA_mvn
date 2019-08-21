@@ -1,4 +1,4 @@
-package JVM;
+package JVM.GC;
 
 public class MinorGC {
     private static final int _1MB = 1024 * 1024;

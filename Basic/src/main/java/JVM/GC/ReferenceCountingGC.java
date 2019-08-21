@@ -1,4 +1,4 @@
-package JVM;
+package JVM.GC;
 
 //help->edit custom VM options 加入参数开启查看GC
 //            -verbose:gc ： 开启gc日志
