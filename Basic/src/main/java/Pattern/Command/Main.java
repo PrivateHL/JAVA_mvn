@@ -17,15 +17,18 @@ public class Main extends JFrame implements ActionListener, MouseMotionListener,
     private MacroCommand history = new MacroCommand();
     private DrawCanvas canvas = new DrawCanvas(400, 400, history);
     private JButton buttonClear = new JButton("clear");
+    private JButton buttonUndo = new JButton("undo");
 
     public Main(String title) {
         super(title);
         this.addWindowListener(this);
         canvas.addMouseMotionListener(this);
         buttonClear.addActionListener(this);
+        buttonUndo.addActionListener(this);
 
         Box buttonBox = new Box(BoxLayout.X_AXIS);
         buttonBox.add(buttonClear);
+        buttonBox.add(buttonUndo);
         Box mainBox = new Box(BoxLayout.Y_AXIS);
         mainBox.add(buttonBox);
         mainBox.add(canvas);
@@ -43,6 +46,9 @@ public class Main extends JFrame implements ActionListener, MouseMotionListener,
         if (e.getSource() == buttonClear) {
             history.clear();
             canvas.repaint();
+        }else if (e.getSource() == buttonUndo){//撤销
+            history.undo();
+            canvas.repaint();//会调用canvas的paint方法
         }
     }
 
