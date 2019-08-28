@@ -1,6 +1,8 @@
- 
- /**
+package JVM.JUC.Synchronized;
+
+/**
  * 同步线程,修饰静态方法
+ * 静态同步方法，锁是当前类的class对象
  */
  public class SyncThread_StaticMethod implements Runnable{
 

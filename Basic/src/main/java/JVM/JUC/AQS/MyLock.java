@@ -73,5 +73,6 @@ public class MyLock implements Lock {
             /** 提供的内部类ConditionObject,用于实现Condition接口，用于await/signal **/
             return new ConditionObject();
         }
+
     }
 }

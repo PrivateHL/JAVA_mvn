@@ -1,3 +1,5 @@
+package JVM.JUC.Synchronized;
+
 public class RecordExample1 implements Runnable{
     int a = 1;
     boolean flag = false;

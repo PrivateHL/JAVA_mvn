@@ -1,5 +1,7 @@
+package JVM.JUC.Synchronized;
+
 /**
- * 同步线程
+ * 同步线程 同步方法块，锁是括号里面的对象
  当两个并发线程(thread1和thread2)访问同一个对象(syncThread)中的synchronized代码块时，
  在同一时刻只能有一个线程得到执行，另一个线程受阻塞，必须等待当前线程执行完这个代码块以后才能执行该代码块。
  **/
