@@ -1,4 +1,4 @@
-package Tool;
+package Tool.file;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,5 +23,12 @@ public class FileUtils {
         }
         String content = sb.toString();
         return content.toString();
+    }
+
+    public boolean getIsIlegalPathdeName(String strFilePathdeName){
+        if( strFilePathdeName == null || "".equals(strFilePathdeName)){
+            return false;
+        }
+        return true;
     }
 }
