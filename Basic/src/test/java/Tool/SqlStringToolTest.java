@@ -39,6 +39,11 @@ public class SqlStringToolTest {
         String newsql6 = " Insert int BOM_027 (N'''',N'''''')";
         String newsql5 = "insert into x(c1) values (N'aaa''aa')";
 
+        String sql8 = "insert into BOM_027(*) values('','''''''''''','','''')";
+        String newsql8 = "insert into BOM_027(*) values(N'',N'''''''''''',N'',N'''')";
+
+        String sql9 = "insert into BOM_027(*) values('',''''''''''' ''  '''' ''''''','','''')";
+        String newsql9 = "insert into BOM_027(*) values(N'',N''''''''''' ''  '''' ''''''',N'',N'''')";
 
         assertEquals(sql1, SqlStringTool.setNvarcharSql(sql1));
         assertEquals(newsql2, SqlStringTool.setNvarcharSql(sql2));
@@ -54,6 +59,9 @@ public class SqlStringToolTest {
         assertEquals(newsql5, SqlStringTool.setNvarcharSql(nsql5));
         assertEquals(newsql6, SqlStringTool.setNvarcharSql(nsql6));
 
+        assertEquals(newsql8,SqlStringTool.setNvarcharSql(sql8));
+        assertEquals(newsql9,SqlStringTool.setNvarcharSql(sql9));
+        System.out.println(SqlStringTool.setNvarcharSql(sql8));
 
     }
 }

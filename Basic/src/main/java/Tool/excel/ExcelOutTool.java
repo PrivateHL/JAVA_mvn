@@ -7,6 +7,5 @@ package Tool.excel;
  **/
 public class ExcelOutTool {
     String filePathedName = "";
-    String
 
 }

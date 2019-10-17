@@ -24,7 +24,6 @@ public class Out2Excel2003 extends AbstractOut2Excel {
 
     @Override
     protected boolean createWorkbench() {
-        wb
         return false;
     }
 
