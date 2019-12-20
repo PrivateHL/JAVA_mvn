@@ -1,10 +1,10 @@
 package JVM.GC;
 
-//help->edit custom VM options ¼ÓÈë²ÎÊı¿ªÆô²é¿´GC
-//            -verbose:gc £º ¿ªÆôgcÈÕÖ¾
-//            -XX:+PrintGCDetails £º ´òÓ¡gcÏêÇé
-//            -XX:+PrintGCDateStamps £º ´òÓ¡gcÊ±¼ä´Á
-//            -Xloggc:gcc.log £º ½«ÈÕÖ¾Êä³öµ½ÎÄ¼şxx(Ä¬ÈÏÎ»ÖÃÎª×ÀÃæ)
+//help->edit custom VM options åŠ å…¥å‚æ•°å¼€å¯æŸ¥çœ‹GC
+//            -verbose:gc ï¼š å¼€å¯gcæ—¥å¿—
+//            -XX:+PrintGCDetails ï¼š æ‰“å°gcè¯¦æƒ…
+//            -XX:+PrintGCDateStamps ï¼š æ‰“å°gcæ—¶é—´æˆ³
+//            -Xloggc:gcc.log ï¼š å°†æ—¥å¿—è¾“å‡ºåˆ°æ–‡ä»¶xx(é»˜è®¤ä½ç½®ä¸ºæ¡Œé¢)
 
 public class ReferenceCountingGC {
     public Object instance = null;

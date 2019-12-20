@@ -11,18 +11,18 @@ abstract class AbstractOut2Excel {
     String errorInfo = "";
     String logInfo = "";
     /**
-    * @Description: ´´½¨POI workbench¹¤×÷²¾
-    * @param:    filePathedName ÍêÕûµÄÊä³öÎÄ¼şÂ·¾¶
-    * @return:
-    * @Author:  HeLing  2019/10/11 9:25
-    */
+     * @Description: åˆ›å»ºPOI workbenchå·¥ä½œç°¿
+     * @param:    filePathedName å®Œæ•´çš„è¾“å‡ºæ–‡ä»¶è·¯å¾„
+     * @return:
+     * @Author:  HeLing  2019/10/11 9:25
+     */
     protected  boolean createWb(String filePathedName) throws Exception{
         if (filePathedName.endsWith(".xls")){
 
         }else if(filePathedName.endsWith(".xlsx")){
 
         }else{
-            errorInfo = "Êä³öÎÄ¼şÖ¸¶¨´íÎóµÄÎÄ¼ş¸ñÊ½£¬Çë¶îÍâÖ¸¶¨";
+            errorInfo = "è¾“å‡ºæ–‡ä»¶æŒ‡å®šé”™è¯¯çš„æ–‡ä»¶æ ¼å¼ï¼Œè¯·é¢å¤–æŒ‡å®š";
             throw new FileFormatInvalid(errorInfo);
         }
         return false;
@@ -34,9 +34,9 @@ abstract class AbstractOut2Excel {
 
     protected abstract boolean createSheet(String sheetName);
 
-    protected abstract boolean createCell(Object value, int wilden);//¿ÉÄÜĞèÒªºÏ²¢µ¥Ôª¸ñ
+    protected abstract boolean createCell(Object value, int wilden);//å¯èƒ½éœ€è¦åˆå¹¶å•å…ƒæ ¼
 
-    protected abstract boolean createRow(ArrayList<Object> rowData);//ÆÕÍ¨µÄÒ»ĞĞÊı¾İĞ´Èë
+    protected abstract boolean createRow(ArrayList<Object> rowData);//æ™®é€šçš„ä¸€è¡Œæ•°æ®å†™å…¥
 
 
     protected  String getErrorInfo(){

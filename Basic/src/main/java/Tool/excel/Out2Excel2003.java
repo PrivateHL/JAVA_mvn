@@ -17,10 +17,10 @@ public class Out2Excel2003 extends AbstractOut2Excel {
     String strFilePathedName = "";
 
     FileOutputStream out = null;
-    HSSFWorkbook wb = null; //´´½¨¹¤×÷±í
-    HSSFSheet sheet = null; //´´½¨sheet
-    HSSFCell cells[] = null; //µ¥Ôª¸ñ
-    HSSFRow rows = null; //¶¨ÒåĞĞ±äÁ¿£¬ÓÃÀ´Ñ­»·¸³
+    HSSFWorkbook wb = null; //åˆ›å»ºå·¥ä½œè¡¨
+    HSSFSheet sheet = null; //åˆ›å»ºsheet
+    HSSFCell cells[] = null; //å•å…ƒæ ¼
+    HSSFRow rows = null; //å®šä¹‰è¡Œå˜é‡ï¼Œç”¨æ¥å¾ªç¯èµ‹
 
     @Override
     protected boolean createWorkbench() {
@@ -34,10 +34,10 @@ public class Out2Excel2003 extends AbstractOut2Excel {
         }
         strFilePathedName = filePathedName;
         if(out == null) {
-            out = new FileOutputStream(strFilePathedName); //Êä³öÁ÷
+            out = new FileOutputStream(strFilePathedName); //è¾“å‡ºæµ
         }
         if(wb == null) {
-            wb = new HSSFWorkbook(); //´´½¨¹¤×÷±í
+            wb = new HSSFWorkbook(); //åˆ›å»ºå·¥ä½œè¡¨
         }
         return false;
     }

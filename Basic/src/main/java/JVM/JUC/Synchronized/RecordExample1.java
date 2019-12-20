@@ -5,7 +5,7 @@ public class RecordExample1 implements Runnable{
     boolean flag = false;
 
     /**
-     * A线程执行
+     * A绾跨▼鎵ц
      */
     public void writer(){
         a = 2;                  // 1
@@ -13,18 +13,18 @@ public class RecordExample1 implements Runnable{
     }
 
     /**
-     * B线程执行
+     * B绾跨▼鎵ц
      */
 
 
     public void read(){
         while(flag){                  // 3
-           //int i = a + a;          // 4
-           System.out.println("a=" + a);
-           break;
+            //int i = a + a;          // 4
+            System.out.println("a=" + a);
+            break;
         }
     }
-    
+
     public void run() {
         String threadName = Thread.currentThread().getName();
         System.out.print(threadName + " ");

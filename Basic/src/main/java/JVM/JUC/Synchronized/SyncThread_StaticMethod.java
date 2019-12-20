@@ -1,49 +1,49 @@
 package JVM.JUC.Synchronized;
 
 /**
- * Í¬²½Ïß³Ì,ĞŞÊÎ¾²Ì¬·½·¨
- * ¾²Ì¬Í¬²½·½·¨£¬ËøÊÇµ±Ç°ÀàµÄclass¶ÔÏó
+ * åŒæ­¥çº¿ç¨‹,ä¿®é¥°é™æ€æ–¹æ³•
+ * é™æ€åŒæ­¥æ–¹æ³•ï¼Œé”æ˜¯å½“å‰ç±»çš„classå¯¹è±¡
  */
- public class SyncThread_StaticMethod implements Runnable{
+public class SyncThread_StaticMethod implements Runnable{
 
-private static int count;
- 
-   public SyncThread_StaticMethod() {
-      count = 0;
-   }
- 
-   public synchronized static void method() {
-      for (int i = 0; i < 5; i ++) {
-         try {
-            System.out.println(Thread.currentThread().getName() + ":" + (count++));
-            Thread.sleep(100);
-         } catch (InterruptedException e) {
-            e.printStackTrace();
-         }
-      }
-   }
-   
-  public void method2() {
-      synchronized(SyncThread_StaticMethod.class) {
-          for (int i = 0; i < 5; i ++) {
-             try {
+    private static int count;
+
+    public SyncThread_StaticMethod() {
+        count = 0;
+    }
+
+    public synchronized static void method() {
+        for (int i = 0; i < 5; i ++) {
+            try {
                 System.out.println(Thread.currentThread().getName() + ":" + (count++));
                 Thread.sleep(100);
-             } catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
-             }
-          }
-      }
-   }
- 
-   public void run() {
-      //method();
-      method2();
-   }
-   
+            }
+        }
+    }
+
+    public void method2() {
+        synchronized(SyncThread_StaticMethod.class) {
+            for (int i = 0; i < 5; i ++) {
+                try {
+                    System.out.println(Thread.currentThread().getName() + ":" + (count++));
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void run() {
+        //method();
+        method2();
+    }
+
     public static void main(String [] args){
-        /** ¾²Ì¬·½·¨ÊÇÊôÓÚÀàµÄ£¬ËùÒÔsyncThread1ºÍsyncThread2Ïàµ±ÓÚÓÃÁËÍ¬Ò»°ÑËø
-            ĞŞÊÎ¾²Ì¬·½·¨£¬ºÍÔÚ·½·¨ÀïÃæĞŞÊÎ£¨class£©ÊÇÍ¬ÑùµÄËøĞ§¹û**/
+        /** é™æ€æ–¹æ³•æ˜¯å±äºç±»çš„ï¼Œæ‰€ä»¥syncThread1å’ŒsyncThread2ç›¸å½“äºç”¨äº†åŒä¸€æŠŠé”
+         ä¿®é¥°é™æ€æ–¹æ³•ï¼Œå’Œåœ¨æ–¹æ³•é‡Œé¢ä¿®é¥°ï¼ˆclassï¼‰æ˜¯åŒæ ·çš„é”æ•ˆæœ**/
         SyncThread_StaticMethod syncThread1 = new SyncThread_StaticMethod();
         SyncThread_StaticMethod syncThread2 = new SyncThread_StaticMethod();
         Thread thread1 = new Thread(syncThread1, "SyncThread1");
@@ -51,4 +51,4 @@ private static int count;
         thread1.start();
         thread2.start();
     }
- }
+}

@@ -7,18 +7,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @Description ÖØÈëËøµÄÊ¹ÓÃ·½·¨
+ * @Description é‡å…¥é”çš„ä½¿ç”¨æ–¹æ³•
  * @Author Heling
  * @Date 2019/8/28 9:36
  **/
 public class ReentrantLockDemo extends Thread {
     public static ReentrantLock lock = new ReentrantLock();
-    public static ReentrantLock lock1 = new ReentrantLock();//²âÊÔÖĞ¶Ï£¬ĞèÒªlock2ºÍlock1Ïà»¥ËÀËø
+    public static ReentrantLock lock1 = new ReentrantLock();//æµ‹è¯•ä¸­æ–­ï¼Œéœ€è¦lock2å’Œlock1ç›¸äº’æ­»é”
     public static ReentrantLock lock2 = new ReentrantLock();
     public static int i = 0;
 
     /**
-     * ²âÊÔµÄÀàĞÍ£º1-ÆÕÍ¨Ëø£»2-ÖØÈëËø£»3-ÏŞÊ±Ëø; 4/5»¥ÏàËÀËø£¬²âÊÔÖĞ¶Ï
+     * æµ‹è¯•çš„ç±»å‹ï¼š1-æ™®é€šé”ï¼›2-é‡å…¥é”ï¼›3-é™æ—¶é”; 4/5äº’ç›¸æ­»é”ï¼Œæµ‹è¯•ä¸­æ–­
      **/
     private int type;
 
@@ -42,7 +42,7 @@ public class ReentrantLockDemo extends Thread {
 
 
     /**
-     * @Description: ÆÕÍ¨µÄ»ñÈ¡Ëø£¬ÊÍ·ÅËø
+     * @Description: æ™®é€šçš„è·å–é”ï¼Œé‡Šæ”¾é”
      * @param: []
      * @return: void
      * @Author: HeLing
@@ -61,8 +61,8 @@ public class ReentrantLockDemo extends Thread {
     }
 
     /**
-     * @Description: ÖØÈëËø£¬¶à´Î»ñµÃËø
-     * ÖØÈëËøÄÚ²¿ÓĞÒ»¸ö»ñµÃËøÏà¹ØµÄ¼ÆÊıÆ÷£¬lock¾Í+1£¬unlock-1ÊÍ·Å¶ÔÓ¦µÄlock´ÎÊı²ÅÄÜÕæÕıÊÍ·Å¡£
+     * @Description: é‡å…¥é”ï¼Œå¤šæ¬¡è·å¾—é”
+     * é‡å…¥é”å†…éƒ¨æœ‰ä¸€ä¸ªè·å¾—é”ç›¸å…³çš„è®¡æ•°å™¨ï¼Œlockå°±+1ï¼Œunlock-1é‡Šæ”¾å¯¹åº”çš„lockæ¬¡æ•°æ‰èƒ½çœŸæ­£é‡Šæ”¾ã€‚
      * @param: []
      * @return: void
      * @Author: HeLing  2019/8/28 10:10
@@ -79,7 +79,7 @@ public class ReentrantLockDemo extends Thread {
     }
 
     /**
-     * @Description: ÏŞÊ±Ëø£¬ÏŞ¶¨¹Ì¶¨µÄÊ±¼ä»ñÈ¡Ëø£¬³¬Ê±¾Í·µ»Ø£¬²»»áÒ»Ö±µÈ´ıÔÚ»ñÈ¡ËøµÄ¶ÓÁĞÖĞ
+     * @Description: é™æ—¶é”ï¼Œé™å®šå›ºå®šçš„æ—¶é—´è·å–é”ï¼Œè¶…æ—¶å°±è¿”å›ï¼Œä¸ä¼šä¸€ç›´ç­‰å¾…åœ¨è·å–é”çš„é˜Ÿåˆ—ä¸­
      * @param: []
      * @return: void
      * @Author: HeLing  2019/8/28 10:23
@@ -129,49 +129,49 @@ public class ReentrantLockDemo extends Thread {
             if (lock2.isHeldByCurrentThread()) {
                 lock2.unlock();
             }
-            System.out.println(Thread.currentThread().getId() + "Ïß³ÌÍË³ö");
+            System.out.println(Thread.currentThread().getId() + "çº¿ç¨‹é€€å‡º");
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
         /**
-        //ÆÕÍ¨Ëø²âÊÔ
-        ReentrantLockDemo demo1 = new ReentrantLockDemo("T1", 1);
-        ReentrantLockDemo demo2 = new ReentrantLockDemo("T2", 1);
-        ReentrantLockDemo demo3 = new ReentrantLockDemo("T3", 1);
-        ReentrantLockDemo demo4 = new ReentrantLockDemo("T4", 1);
-        ReentrantLockDemo demo5 = new ReentrantLockDemo("T5", 1);
+         //æ™®é€šé”æµ‹è¯•
+         ReentrantLockDemo demo1 = new ReentrantLockDemo("T1", 1);
+         ReentrantLockDemo demo2 = new ReentrantLockDemo("T2", 1);
+         ReentrantLockDemo demo3 = new ReentrantLockDemo("T3", 1);
+         ReentrantLockDemo demo4 = new ReentrantLockDemo("T4", 1);
+         ReentrantLockDemo demo5 = new ReentrantLockDemo("T5", 1);
 
-        demo1.start();
-        demo2.start();
-        demo3.start();
-        demo4.start();
-        demo5.start();
-        demo1.join();//Ö÷Ïß³ÌµÈ´ı×ÓÏß³ÌÖ´ĞĞÍêÔÙÖ´ĞĞ
-        demo2.join();
-        demo3.join();
-        demo4.join();
-        demo5.join();
-        System.out.println(i);
+         demo1.start();
+         demo2.start();
+         demo3.start();
+         demo4.start();
+         demo5.start();
+         demo1.join();//ä¸»çº¿ç¨‹ç­‰å¾…å­çº¿ç¨‹æ‰§è¡Œå®Œå†æ‰§è¡Œ
+         demo2.join();
+         demo3.join();
+         demo4.join();
+         demo5.join();
+         System.out.println(i);
 
 
-        //ÏŞÊ±Ëø
-        ReentrantLockDemo demo6 = new ReentrantLockDemo("timelimitThread1",3);
-        ReentrantLockDemo demo7 = new ReentrantLockDemo("timelimitThread2",3);
-        demo6.start();
-        demo7.start();
+         //é™æ—¶é”
+         ReentrantLockDemo demo6 = new ReentrantLockDemo("timelimitThread1",3);
+         ReentrantLockDemo demo7 = new ReentrantLockDemo("timelimitThread2",3);
+         demo6.start();
+         demo7.start();
          **/
-        //ËÀËø ÖĞ¶Ï²âÊÔ
+        //æ­»é” ä¸­æ–­æµ‹è¯•
         ReentrantLockDemo demo8 = new ReentrantLockDemo("lockInterrupt1" ,4);
         ReentrantLockDemo demo9 = new ReentrantLockDemo("lockInterrupt2" ,5);
         demo8.start();
         demo9.start();
         Thread.sleep(1000);
-       // DeadlockChecker.check();
+        // DeadlockChecker.check();
     }
 
     /**
-     * ËÀËø¼ì²éÆ÷£¬4/5»á»¥ÏàËÀËø£¬¼ì²âµ½ºóÖ´ĞĞinterruptÖĞ¶Ï
+     * æ­»é”æ£€æŸ¥å™¨ï¼Œ4/5ä¼šäº’ç›¸æ­»é”ï¼Œæ£€æµ‹åˆ°åæ‰§è¡Œinterruptä¸­æ–­
      */
     static class DeadlockChecker{
 
@@ -203,7 +203,7 @@ public class ReentrantLockDemo extends Thread {
                     }
                 }
             };
-            //ÉèÖÃÎªÊØ»¤Ïß³Ì--Ò²³Æ¡°·şÎñÏß³Ì¡±£¬ÔÚÃ»ÓĞÓÃ»§Ïß³Ì¿É·şÎñÊ±»á×Ô¶¯Àë¿ª¡£ÓÅÏÈ¼¶£ºÊØ»¤Ïß³ÌµÄÓÅÏÈ¼¶±È½ÏµÍ£¬ÓÃÓÚÎªÏµÍ³ÖĞµÄÆäËü¶ÔÏóºÍÏß³ÌÌá¹©·şÎñ¡£
+            //è®¾ç½®ä¸ºå®ˆæŠ¤çº¿ç¨‹--ä¹Ÿç§°â€œæœåŠ¡çº¿ç¨‹â€ï¼Œåœ¨æ²¡æœ‰ç”¨æˆ·çº¿ç¨‹å¯æœåŠ¡æ—¶ä¼šè‡ªåŠ¨ç¦»å¼€ã€‚ä¼˜å…ˆçº§ï¼šå®ˆæŠ¤çº¿ç¨‹çš„ä¼˜å…ˆçº§æ¯”è¾ƒä½ï¼Œç”¨äºä¸ºç³»ç»Ÿä¸­çš„å…¶å®ƒå¯¹è±¡å’Œçº¿ç¨‹æä¾›æœåŠ¡ã€‚
             tt.setDaemon(true);
             tt.start();
         }

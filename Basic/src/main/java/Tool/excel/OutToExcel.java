@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 /**
- * @Description µ¼³öĞÅÏ¢µ½excel
+ * @Description å¯¼å‡ºä¿¡æ¯åˆ°excel
  * @Author Heling
  * @Date 2019/10/10 18:27
  **/
@@ -21,10 +21,10 @@ public class OutToExcel  {
     String title = "";
 
     FileOutputStream out = null;
-    HSSFWorkbook wb = null; //´´½¨¹¤×÷±í
-    HSSFSheet sheet = null; //´´½¨sheet
-    HSSFCell cells[] = null; //µ¥Ôª¸ñ
-    HSSFRow rows = null; //¶¨ÒåĞĞ±äÁ¿£¬ÓÃÀ´Ñ­»·¸³
+    HSSFWorkbook wb = null; //åˆ›å»ºå·¥ä½œè¡¨
+    HSSFSheet sheet = null; //åˆ›å»ºsheet
+    HSSFCell cells[] = null; //å•å…ƒæ ¼
+    HSSFRow rows = null; //å®šä¹‰è¡Œå˜é‡ï¼Œç”¨æ¥å¾ªç¯èµ‹
 
     int pageMaxRow = 2500;
 
@@ -41,31 +41,31 @@ public class OutToExcel  {
         int dealingRow = 0;
 
         if (filePathedName != null && filePathedName.indexOf("\"") > -1) { //$NON-NLS-1$
-            JOptionPane.showMessageDialog(null,"´íÎóÎÄ¼şÃû"); //$NON-NLS-1$ //$NON-NLS-2$
+            JOptionPane.showMessageDialog(null,"é”™è¯¯æ–‡ä»¶å"); //$NON-NLS-1$ //$NON-NLS-2$
             return false;
         }
 
         if(out == null) {
             try {
-                out = new FileOutputStream(filePathedName); //Êä³öÁ÷
+                out = new FileOutputStream(filePathedName); //è¾“å‡ºæµ
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
         if(wb == null) {
-            wb = new HSSFWorkbook(); //´´½¨¹¤×÷±í
+            wb = new HSSFWorkbook(); //åˆ›å»ºå·¥ä½œè¡¨
         }
         if(sheet == null) {
-            sheet = wb.createSheet(); //´´½¨sheet
+            sheet = wb.createSheet(); //åˆ›å»ºsheet
         }
 
         for (int ir = 0; ir < this.altData.size(); ir++) {
             rows = sheet.createRow( (short) ++dealingRow);
             String data[] = ( (String[]) altData.get(ir));
-            cells = new HSSFCell[data.length ];//¶¨Òåµ¥Ôª¸ñ±äÁ¿£¬ÓÃÀ´Ñ­»·¸³Öµ
+            cells = new HSSFCell[data.length ];//å®šä¹‰å•å…ƒæ ¼å˜é‡ï¼Œç”¨æ¥å¾ªç¯èµ‹å€¼
             for (int ii = 0; ii < ( (String[]) altData.get(ir)).length; ii++) {
                 cells[ii] = rows.createCell( (short) ii);
-               // cells[ii].setCellStyle(headerCS);
+                // cells[ii].setCellStyle(headerCS);
                 try {
                     cells[ii].setCellValue(data[ii]);
                 }
@@ -75,13 +75,13 @@ public class OutToExcel  {
             int ii = 2 + ir;
             int jj = 3 + ir;
             if(dealingRow >= 32768 && dealingRow % 32768 == 0){
-                sheet =  wb.createSheet(); //´´½¨sheet
+                sheet =  wb.createSheet(); //åˆ›å»ºsheet
                 dealingRow = 0;
             }
         }
         try {
-            wb.write(out); //Êä³öÁ÷µ½µç×Ó±í¸ñ
-            out.close(); //¹Ø±Õ¶ÔÎÄ¼şµÄÊ¹ÓÃ
+            wb.write(out); //è¾“å‡ºæµåˆ°ç”µå­è¡¨æ ¼
+            out.close(); //å…³é—­å¯¹æ–‡ä»¶çš„ä½¿ç”¨
         }catch (Exception ex){
             ex.printStackTrace();
         }finally {

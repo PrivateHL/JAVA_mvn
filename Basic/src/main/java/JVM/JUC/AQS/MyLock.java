@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 /**
- * @Description ¼Ì³ĞAQS¶ÓÁĞ£¬ÊµÏÖ×Ô¼ºµÄ¶ÀÕ¼Ëø
+ * @Description ç»§æ‰¿AQSé˜Ÿåˆ—ï¼Œå®ç°è‡ªå·±çš„ç‹¬å é”
  * @Author Heling
  * @Date 2019/8/27 19:45
  **/
@@ -40,9 +40,9 @@ public class MyLock implements Lock {
     private class Helper extends AbstractQueuedSynchronizer {
         @Override
         protected boolean tryAcquire(int arg) {
-            //Èç¹ûµÚÒ»¸öÏß³Ì½øÀ´£¬ÄÃµ½Ëø£¬·µ»ØTRUE
-            //Èç¹ûµÚ¶ş¸öÏß³Ì½øÀ´£¬·µ»ØFALSE£¬ÄÃ²»µ½Ëø
-            int state = getState();//»ñµÃËø£¬0±íÊ¾lock£¬1±íÊ¾unlock
+            //å¦‚æœç¬¬ä¸€ä¸ªçº¿ç¨‹è¿›æ¥ï¼Œæ‹¿åˆ°é”ï¼Œè¿”å›TRUE
+            //å¦‚æœç¬¬äºŒä¸ªçº¿ç¨‹è¿›æ¥ï¼Œè¿”å›FALSEï¼Œæ‹¿ä¸åˆ°é”
+            int state = getState();//è·å¾—é”ï¼Œ0è¡¨ç¤ºlockï¼Œ1è¡¨ç¤ºunlock
             if(state == 0){
                 if(compareAndSetState(0,arg)) {
                     setExclusiveOwnerThread(Thread.currentThread());
@@ -50,12 +50,12 @@ public class MyLock implements Lock {
                 }
             }
             return false;
-           // return super.tryAcquire(arg);
+            // return super.tryAcquire(arg);
         }
 
         @Override
         protected boolean tryRelease(int arg) {
-            //ËøµÄ»ñÈ¡ºÍÊÍ·ÅĞèÒª11¶ÔÓ¦£¬ÄÇÃ´µ÷ÓÃÕâ¸ö·½·¨µÄÏß³Ì£¬Ò»¶¨ÊÇµ±Ç°Ïß³ÌÈÃ¡£
+            //é”çš„è·å–å’Œé‡Šæ”¾éœ€è¦11å¯¹åº”ï¼Œé‚£ä¹ˆè°ƒç”¨è¿™ä¸ªæ–¹æ³•çš„çº¿ç¨‹ï¼Œä¸€å®šæ˜¯å½“å‰çº¿ç¨‹è®©ã€‚
             if(Thread.currentThread() != getExclusiveOwnerThread()){
                 throw new RuntimeException();
             }
@@ -66,11 +66,11 @@ public class MyLock implements Lock {
                 return true;
             }
             return false;
-           // return super.tryRelease(arg);
+            // return super.tryRelease(arg);
         }
 
         Condition newCondition() {
-            /** Ìá¹©µÄÄÚ²¿ÀàConditionObject,ÓÃÓÚÊµÏÖCondition½Ó¿Ú£¬ÓÃÓÚawait/signal **/
+            /** æä¾›çš„å†…éƒ¨ç±»ConditionObject,ç”¨äºå®ç°Conditionæ¥å£ï¼Œç”¨äºawait/signal **/
             return new ConditionObject();
         }
 

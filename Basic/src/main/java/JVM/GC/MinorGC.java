@@ -8,34 +8,34 @@ public class MinorGC {
     }
 
     /**
-     * ÊµÑéÄêÇáGC
+     * å®éªŒå¹´è½»GC
      *
-     * vm²ÎÊı -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
+     * vmå‚æ•° -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
      */
     public static void testAllocation(){
         byte[] allocation1,allocation2,allocation3,allocation4;
         allocation1 = new byte[2 * _1MB];
         allocation2 = new byte[2 * _1MB];
         allocation3 = new byte[2 * _1MB];
-        allocation4 = new byte[4 * _1MB];//³öÏÖÒ»´Îminor GC
+        allocation4 = new byte[4 * _1MB];//å‡ºç°ä¸€æ¬¡minor GC
     }
 
     /**
-     * ÊµÑé´ó¶ÔÏóÖ±½Ó½øÈëÀÏÄêÇø
-     * vm²ÎÊı -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
+     * å®éªŒå¤§å¯¹è±¡ç›´æ¥è¿›å…¥è€å¹´åŒº
+     * vmå‚æ•° -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
      *          -XX:PretenureSizeThreshold=3145728
-     * PretenureSizeThreshold²ÎÊıÖµ²»ÄÜ´øµ¥Î» ĞèÒª×ª»¯Îªbyte,²ÎÊıÖ»¶ÔSerial/ParNewÁ½¿îÊÕ¼¯Æ÷ÓĞĞ§
+     * PretenureSizeThresholdå‚æ•°å€¼ä¸èƒ½å¸¦å•ä½ éœ€è¦è½¬åŒ–ä¸ºbyte,å‚æ•°åªå¯¹Serial/ParNewä¸¤æ¬¾æ”¶é›†å™¨æœ‰æ•ˆ
      */
     public static void testPretenureSizeThreshold(){
         byte[] allocation;
-        allocation = new byte[ 4 * _1MB];//Ö±½Ó·ÖÅäµ½ÀÏÄê´ú
+        allocation = new byte[ 4 * _1MB];//ç›´æ¥åˆ†é…åˆ°è€å¹´ä»£
     }
 
     /**
-     * ÊµÑé³¤ÆÚ´æ»îµÄ¶ÔÏó½«½øÈëÀÏÄê´ú  µ½´ïÄêÁä¾Í»á½øÈëÀÏÄê´ú
-     * vm²ÎÊı -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
+     * å®éªŒé•¿æœŸå­˜æ´»çš„å¯¹è±¡å°†è¿›å…¥è€å¹´ä»£  åˆ°è¾¾å¹´é¾„å°±ä¼šè¿›å…¥è€å¹´ä»£
+     * vmå‚æ•° -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
      *          -XX:+PrintTenuringDistribution -XX:MaxTenuringThreshold=1
-     * PretenureSizeThreshold²ÎÊıÖµ²»ÄÜ´øµ¥Î» ĞèÒª×ª»¯Îªbyte,²ÎÊıÖ»¶ÔSerial/ParNewÁ½¿îÊÕ¼¯Æ÷ÓĞĞ§
+     * PretenureSizeThresholdå‚æ•°å€¼ä¸èƒ½å¸¦å•ä½ éœ€è¦è½¬åŒ–ä¸ºbyte,å‚æ•°åªå¯¹Serial/ParNewä¸¤æ¬¾æ”¶é›†å™¨æœ‰æ•ˆ
      */
     public  static void testTenuingThreshold(){
         byte[] allocation1, allocation2, allocation3;
@@ -47,16 +47,16 @@ public class MinorGC {
     }
 
     /**
-     * ÊµÑé³¤ÆÚ´æ»îµÄ¶ÔÏó½«½øÈëÀÏÄê´ú  ÏàÍ¬ÄêÁäËùÓĞ¶ÔÏó´óĞ¡×ÜºÍ´óÓÚ´æ»îÇøÄÚ´æµÄÒ»°ë£¬Ôò´óÓÚµÈÓÚÕâ¸öÄêÁäµÄ¶ÔÏó¶¼¿ÉÒÔ°á¼ÒÈ¥ÑøÀÏÇø
-     * vm²ÎÊı -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
+     * å®éªŒé•¿æœŸå­˜æ´»çš„å¯¹è±¡å°†è¿›å…¥è€å¹´ä»£  ç›¸åŒå¹´é¾„æ‰€æœ‰å¯¹è±¡å¤§å°æ€»å’Œå¤§äºå­˜æ´»åŒºå†…å­˜çš„ä¸€åŠï¼Œåˆ™å¤§äºç­‰äºè¿™ä¸ªå¹´é¾„çš„å¯¹è±¡éƒ½å¯ä»¥æ¬å®¶å»å…»è€åŒº
+     * vmå‚æ•° -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
      *          -XX:+PrintTenuringDistribution -XX:MaxTenuringThreshold=15
-     * PretenureSizeThreshold²ÎÊıÖµ²»ÄÜ´øµ¥Î» ĞèÒª×ª»¯Îªbyte,²ÎÊıÖ»¶ÔSerial/ParNewÁ½¿îÊÕ¼¯Æ÷ÓĞĞ§
+     * PretenureSizeThresholdå‚æ•°å€¼ä¸èƒ½å¸¦å•ä½ éœ€è¦è½¬åŒ–ä¸ºbyte,å‚æ•°åªå¯¹Serial/ParNewä¸¤æ¬¾æ”¶é›†å™¨æœ‰æ•ˆ
      */
     public  static void testTenuingThreshold2(){
         byte[] allocation1, allocation2, allocation3, allocation4;
         allocation1 = new byte[ _1MB/ 4 ];
         allocation2 = new byte[ _1MB/ 4 ];
-        //allocation1 + allocation2µÄ´óĞ¡Îª0.5MBÎª´æ»îÇøµÄÒ»°ë
+        //allocation1 + allocation2çš„å¤§å°ä¸º0.5MBä¸ºå­˜æ´»åŒºçš„ä¸€åŠ
         allocation3 = new byte[ 4 * _1MB];
         allocation4 = new byte[ 4 * _1MB];
         allocation4 = null;
@@ -64,10 +64,10 @@ public class MinorGC {
     }
 
     /**
-     * ÊµÑé¿Õ¼ä·ÖÅäµ£±£
-     * vm²ÎÊı -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
+     * å®éªŒç©ºé—´åˆ†é…æ‹…ä¿
+     * vmå‚æ•° -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+printGCDetails -XX:survivorRatio=8
      *          -XX:HandlePromotionFailure
-     * HandlePromotionFailure ²ÎÊıÉèÖÃÔÚJDK 1.6 update 24ºó¾Í²»»áÔÙÉúĞ§
+     * HandlePromotionFailure å‚æ•°è®¾ç½®åœ¨JDK 1.6 update 24åå°±ä¸ä¼šå†ç”Ÿæ•ˆ
      */
     public static void testHandlePromotion(){
         byte[] allocation1,allocation2,allocation3,allocation4,allocation5,allocation6,allocation7;

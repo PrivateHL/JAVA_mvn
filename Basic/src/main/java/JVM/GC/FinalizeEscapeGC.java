@@ -14,10 +14,10 @@ public class FinalizeEscapeGC {
     }
     public static void main(String[] args) throws Throwable{
         SAVE_HOOK = new FinalizeEscapeGC();
-        //¶ÔÏóµÚÒ»´Î³É¹¦Õü¾È×Ô¼º
+        //å¯¹è±¡ç¬¬ä¸€æ¬¡æˆåŠŸæ‹¯æ•‘è‡ªå·±
         SAVE_HOOK = null;
         System.gc();
-        //ÒòÎªfinalize·½·¨ÓÅÏÈ¼¶ºÜµÍ£¬ËùÒÔÔİÍ£0.5ÃëµÈËüÖ´ĞĞ
+        //å› ä¸ºfinalizeæ–¹æ³•ä¼˜å…ˆçº§å¾ˆä½ï¼Œæ‰€ä»¥æš‚åœ0.5ç§’ç­‰å®ƒæ‰§è¡Œ
         Thread.sleep(500);
         if( SAVE_HOOK == null ){
             System.out.println("NO, i am dead.");
@@ -26,10 +26,10 @@ public class FinalizeEscapeGC {
             SAVE_HOOK.isAlive();
         }
 
-        //ÔÙÒ»´Î»ØÊÕ£¬¾Í»áÕü¾ÈÊ§°Ü ÒòÎªfinalize²»ÔÙÖ´ĞĞ
+        //å†ä¸€æ¬¡å›æ”¶ï¼Œå°±ä¼šæ‹¯æ•‘å¤±è´¥ å› ä¸ºfinalizeä¸å†æ‰§è¡Œ
         SAVE_HOOK = null;
         System.gc();
-        //ÒòÎªfinalize·½·¨ÓÅÏÈ¼¶ºÜµÍ£¬ËùÒÔÔİÍ£0.5ÃëµÈËüÖ´ĞĞ
+        //å› ä¸ºfinalizeæ–¹æ³•ä¼˜å…ˆçº§å¾ˆä½ï¼Œæ‰€ä»¥æš‚åœ0.5ç§’ç­‰å®ƒæ‰§è¡Œ
         Thread.sleep(500);
         if( SAVE_HOOK == null ){
             System.out.println("NO, i am dead.");
