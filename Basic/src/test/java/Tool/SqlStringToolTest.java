@@ -33,6 +33,14 @@ public class SqlStringToolTest {
         String nsql5 = "insert into x(c1) values (N'aaa''aa')";
         String nsql7 = "Insert into BOM_027 (*) values ('',N'','')";
 
+        String  sql10 = "select DISTINCT BM.PARTID,BM.PARTVAR,sys019.CPERSONNAME,BM.PRODUCTKIND from BOM_027 BM  left join BOM_028 PM on (BM.partid=PM.partid and BM.partvar=PM.partvar)" +
+                " left join BOM_094 AM on(PM.partid=AM.partid and PM.partvar=AM.partvar)  left join BOM_017 CM on(CM.partid=BM.partid and CM.partvar=BM.partvar) where BM.partid=N'101010620' " +
+                "and BM.partvar=N'10' LEFT OUTER JOIN SYS_019 sys019 ON (sys019.CPERSONID=BM.CCREATOR )";
+        String newsql10 = "select DISTINCT BM.PARTID,BM.PARTVAR,sys019.CPERSONNAME,BM.PRODUCTKIND from BOM_027 BM  left join BOM_028 PM on (BM.partid=PM.partid and BM.partvar=PM.partvar)" +
+                " left join BOM_094 AM on(PM.partid=AM.partid and PM.partvar=AM.partvar)  left join BOM_017 CM on(CM.partid=BM.partid and CM.partvar=BM.partvar) where BM.partid=N'101010620' " +
+                "and BM.partvar=N'10' LEFT OUTER JOIN SYS_019 sys019 ON (sys019.CPERSONID=BM.CCREATOR )";
+
+
         String newsql2 = "Insert into BOM_027 (*) values (N'',N'',N'')";
         String newsql3 = "update BOM_027 set index =N''";
         String newsql4 = " Insert int BOM_027 (N'''',N''''' ')";
