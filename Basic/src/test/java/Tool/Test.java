@@ -1,5 +1,7 @@
 package Tool;
 
+import javax.swing.filechooser.FileSystemView;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
@@ -7,8 +9,50 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Test {
     public static void main(String[] args)  {
-        demoHowLockUse();
-        testStringInstanceAndConstentDiff();
+//        demoHowLockUse();
+        testTransientWordsUsage();
+    }
+
+    /**
+     * 测试 transient关键字的用法，防止序列化
+     * 序列化指Java对象转化为可存储可传输的形式，一般文件读写、网络传输会使用这样的过程
+     * 自定义序列化和反序列化 重写writeObject/readObject方法
+     */
+    public static void testTransientWordsUsage(){
+        TransientWordTest test = new TransientWordTest("常规属性", "transient属性");
+        System.out.println("序列化前："+test.toString());
+        ObjectOutputStream outStream;
+        ObjectInputStream inStream;
+        String desktopPath = FileSystemView.getFileSystemView() .getHomeDirectory().getAbsolutePath();
+        String filePath = desktopPath + "\\TransientTest.obj";
+        try {
+            outStream = new ObjectOutputStream(new FileOutputStream(filePath));
+            outStream.writeObject(test);
+
+            inStream = new ObjectInputStream(new FileInputStream(filePath));
+            TransientWordTest readObject = (TransientWordTest)inStream.readObject();
+            /** transient修饰的属性2，不会参与到序列化和反序列化的过程 **/
+            System.out.println("序列化后："+readObject.toString());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static class TransientWordTest implements Serializable {
+        private static final long serialVersionUID = 233858934995755239L;
+        private String name1;
+        private transient String name2;
+        public TransientWordTest(String name1,String name2){
+            this.name1 = name1;
+            this.name2 = name2;
+        }
+        public String toString(){
+            return String.format("TransientTest.toString(): name1=%s,name2=%s", name1,name2);
+        }
     }
 
     /**
@@ -168,11 +212,14 @@ public class Test {
      * 使用Lock锁的方式
      */
     public static void demoHowLockUse(){
-        demoHowLockUse_ReentrantLock_Lock();
+//        demoHowLockUse_ReentrantLock_Lock();
+//        demoHowLockUse_ReentrantLock_TryLock();
+        demoHowLockUse_ReentrantLock_TryLockInTimePeriod();
     }
 
     /**
      * ReentrantLock lock方式获得锁
+     * 获得锁到释放锁，可以看到每个打印间隔时间在0.5秒左右，效率低
      */
     public static void demoHowLockUse_ReentrantLock_Lock(){
          final ReentrantLockTest reentrantLockTest = new ReentrantLockTest();
@@ -189,6 +236,57 @@ public class Test {
         }
     }
 
+    /**
+     * TryLock线程尝试争取锁，有没有取到都立即返回，和Lock不同，lock必须要等到获取到锁才会返回
+     * 每个拿到锁的线程占用100毫秒，每隔10毫秒启动一个线程去尝试争取锁
+     * 就会出现隔断时间会有一个获得锁，之后100毫秒内的线程都会获取失败，100毫秒后又会有个线程获得到锁
+     */
+    public static void demoHowLockUse_ReentrantLock_TryLock(){
+        final ReentrantLockTest reentrantLockTest = new ReentrantLockTest();
+        ArrayList<Thread> altThreads = new ArrayList();
+        for (int i = 0; i <30 ; i++) {
+            altThreads .add ( new Thread(new Runnable() {
+                public void run() {
+                    reentrantLockTest.tryLockTest(Thread.currentThread());
+                }
+            }, "Thread" + i ) );
+        }
+        altThreads.get(0).start();
+        for (int i = 1; i < altThreads.size(); i++) {
+            altThreads.get(i).start();
+            try{
+                Thread.sleep(10);//后面的线程个0.01秒启动一个
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 在一个时间段内尝试争取锁
+     */
+    public static void demoHowLockUse_ReentrantLock_TryLockInTimePeriod(){
+        final ReentrantLockTest reentrantLockTest = new ReentrantLockTest();
+        ArrayList<Thread> altThreads = new ArrayList();
+        for (int i = 0; i <3 ; i++) {
+            altThreads .add ( new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        reentrantLockTest.tryLockParamTest(Thread.currentThread());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, "Thread" + i ) );
+        }
+        //三个线程启动，都设置一直在3s时间内一直去tryLock,每个线程获得后占用锁2s。
+        //第一次，锁被其中一个线程A得到后占用，另外两个线程B、C都会等待
+        //2s后A释放锁，BC争取锁，只会有其中一个获得，并占用2s,第4秒才会释放
+        // 对于另外一个线程，在第3s的时候，因为一直抢不到锁就会放弃放弃返回false
+        for (int i = 0; i < altThreads.size(); i++) {
+            altThreads.get(i).start();
+        }
+    }
     /**
      * ReentrantLock代表lock，演示如何使用Lock
      */
@@ -225,10 +323,11 @@ public class Test {
          *  尝试获取锁 tryLock() 它表示用来尝试获取锁，如果获取成功，则返回true，如果获取失败（即锁已被其他线程获取），则返回false
          */
         public void tryLockTest(Thread thread) {
+
             if(lock.tryLock()) { //尝试获取锁
                 try {
                     System.out.println("线程"+thread.getName() + "获取当前锁"); //打印当前锁的名称
-                    Thread.sleep(2000);//为看出执行效果，是线程此处休眠2秒
+                    Thread.sleep(100);//为看出执行效果，是线程此处休眠0.1秒
                 } catch (Exception e) {
                     System.out.println("线程"+thread.getName() + "发生了异常释放锁");
                 }finally {
